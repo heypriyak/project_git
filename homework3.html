@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Photography Passion</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #89aaff, #c0e1ff);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+}
+
+p {
+  font-size: 18px;
+  color: #555;
+}
+
+.quote {
+  font-size: 20px;
+  font-style: italic;
+  margin-top: 20px;
+  color: #888;
+}
+
+.photo {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #009688;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #00796b;
+}
+
+let joinButton = document.getElementById('joinButton');
+
+joinButton.addEventListener('click', function() {
+  let name = prompt('Enter your name to join our community:');
+  if (name) {
+    alert(`Welcome, ${name}! We're glad to have you as a part of our nature photography community.`);
+  } else {
+    alert('Please enter your name to join.');
+  }
+});
+
+</style>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Nature Photography</h1>
+        <p>Explore the beauty of nature through the lens of a camera.</p>
+        <img src="https://thumbs.dreamstime.com/z/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg?w=992" alt="Nature Photography" class="photo">
+        <p class="quote">"Take only memories, leave only footprints." - Chief Seattle</p>
+        <button id="joinButton">Join Our Community</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

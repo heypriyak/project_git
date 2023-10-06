@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+
+
+    body, h1, h2, h3, p, div {
+    margin: 0;
+    padding: 0;
+    }
+
+    body {
+    font-family: Arial, sans-serif;
+    }
+
+    /* Header */
+    header {
+    background-color: #007BFF;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    /* Search bar */
+    .search input {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    }
+
+    .search button {
+    padding: 0.5rem 1rem;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    color: white;
+    cursor: pointer;
+    }
+
+    /* Main content */
+    .main {
+    padding: 2rem;
+    }
+
+    .current-weather {
+    text-align: center;
+    }
+
+    .weather-icon {
+    font-size: 3rem;
+    margin: 1rem 0;
+    }
+
+    .forecast {
+    margin-top: 2rem;
+    }
+
+    .forecast-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-top: 1px solid #ccc;
+    }
+
+    /* Footer */
+    footer {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .unit-toggle {
+    display: flex;
+    gap: 0.5rem;
+    }
+
+
+
+    <header>
+        <div class="logo">Weather App</div>
+        <div class="search">
+            <input type="text" placeholder="Enter city">
+            <button>Search</button>
+        </div>
+    </header>
+    <main>
+        <div class="current-weather">
+            <h2 class="city-name">New York, NY</h2>
+            <div class="temperature">72°F</div>
+            <div class="weather-icon">☀️</div>
+            <div class="weather-description">Partly Cloudy</div>
+        </div>
+        <div class="forecast">
+            <h3>5-Day Forecast</h3>
+            <div class="forecast-card">
+                <div class="day">Mon</div>
+                <div class="icon">☀️</div>
+                <div class="temp-range">High: 75°F, Low: 60°F</div>
+            </div>
+            <!-- Repeat similar cards for other days -->
+        </div>
+    </main>
+    <footer>
+        <div class="settings">Settings</div>
+        <div class="unit-toggle">
+            <label>
+                <input type="radio" name="unit" value="fahrenheit" checked>F
+            </label>
+            <label>
+                <input type="radio" name="unit" value="celsius">C
+            </label>
+        </div>
+        <div class="data-source">Data Source</div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

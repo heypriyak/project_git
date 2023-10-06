@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+
+<body>
+    <h1>Weather App</h1>
+    <p id="date-time"></p>
+    <form id="search-form">
+        <input type="text" id="city-input" placeholder="Enter a city">
+        <button type="submit">Search</button>
+    </form>
+    <p id="city-name"></p>
+    <p id="temperature"></p>
+</body>
+<script>
+    // Function to display the current date and time
+        function displayDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', hour: 'numeric', minute: 'numeric' };
+            const dateTimeString = now.toLocaleDateString('en-US', options);
+            document.getElementById('date-time').textContent = dateTimeString;
+        }
+
+        // Function to handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const cityInput = document.getElementById('city-input');
+            const cityName = cityInput.value;
+            document.getElementById('city-name').textContent = `City: ${cityName}`;
+
+            // You can replace this with your actual temperature data
+            const fakeTemperatureCelsius = 17;
+            document.getElementById('temperature').textContent = `Temperature: ${fakeTemperatureCelsius}°C`;
+
+            // Bonus feature: Add a link to convert temperature to Fahrenheit
+            const temperatureElement = document.getElementById('temperature');
+            temperatureElement.innerHTML += ' (<a href="#" id="convert-link">Convert to Fahrenheit</a>)';
+
+            // Convert Celsius to Fahrenheit
+            let isCelsius = true;
+            const convertLink = document.getElementById('convert-link');
+            convertLink.addEventListener('click', () => {
+                if (isCelsius) {
+                    const fakeTemperatureFahrenheit = (fakeTemperatureCelsius * 9) / 5 + 32;
+                    temperatureElement.textContent = `Temperature: ${Math.round(fakeTemperatureFahrenheit)}°F`;
+                    convertLink.textContent = 'Convert to Celsius';
+                } else {
+                    temperatureElement.textContent = `Temperature: ${fakeTemperatureCelsius}°C`;
+                    convertLink.textContent = 'Convert to Fahrenheit';
+                }
+                isCelsius = !isCelsius;
+            });
+        }
+
+        // Display the date and time when the page loads
+        displayDateTime();
+
+        // Add event listener for form submission
+        const searchForm = document.getElementById('search-form');
+        searchForm.addEventListener('submit', handleFormSubmit);
+    <script src="script.js"></script>
+
+</script>
+
+</html>

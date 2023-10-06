@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form id="search-form">
+            <input type="text" id="city-input" placeholder="Enter a city">
+            <button type="submit">Search</button>
+        </form>
+        <div id="weather-info">
+            <p id="city-name"></p>
+            <p id="temperature"></p>
+        </div>
+        <button id="current-location-button">Current Location</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+body {
+font-family: Arial, sans-serif;
+background-color: #f0f0f0;
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+.container {
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+padding: 20px;
+text-align: center;
+}
+
+h1 {
+margin-top: 0;
+}
+
+form {
+margin-bottom: 20px;
+}
+
+input[type="text"] {
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 4px;
+width: 100%;
+font-size: 16px;
+}
+
+button[type="submit"] {
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 4px;
+padding: 8px 16px;
+cursor: pointer;
+}
+
+#weather-info {
+display: none;
+margin-top: 20px;
+}
+
+#city-name {
+font-size: 24px;
+}
+
+#temperature {
+font-size: 18px;
+}
+
+#current-location-button {
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 4px;
+padding: 8px 16px;
+cursor: pointer;
+}
+
+<script>
+// Function to fetch weather data by city name from the OpenWeather API
+async function fetchWeatherByCity(city) {
+  const apiKey = 'YOUR_OPENWEATHER_API_KEY'; // Replace with your OpenWeather API key
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data.cod === 200) {
+      const cityName = data.name;
+      const temperature = Math.round(data.main.temp - 273.15); // Convert from Kelvin to Celsius
+      document.getElementById('city-name').textContent = `City: ${cityName}`;
+      document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+      document.getElementById('weather-info').style.display = 'block';
+    } else {
+      alert(`City not found: ${city}`);
+    }
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    alert('An error occurred while fetching weather data.');
+  }
+}
+
+// Function to handle form submission
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const cityInput = document.getElementById('city-input');
+  const cityName = cityInput.value;
+  fetchWeatherByCity(cityName);
+}
+
+// Add event listener for form submission
+const searchForm = document.getElementById('search-form');
+searchForm.addEventListener('submit', handleFormSubmit);
+
+// Function to fetch weather data by coordinates from the OpenWeather API
+async function fetchWeatherByCoordinates(latitude, longitude) {
+  const apiKey = 'YOUR_OPENWEATHER_API_KEY'; // Replace with your OpenWeather API key
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data.cod === 200) {
+      const cityName = data.name;
+      const temperature = Math.round(data.main.temp - 273.15); // Convert from Kelvin to Celsius
+      document.getElementById('city-name').textContent = `City: ${cityName}`;
+      document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+      document.getElementById('weather-info').style.display = 'block';
+    } else {
+      alert(`Unable to fetch weather data for your location.`);
+    }
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    alert('An error occurred while fetching weather data.');
+  }
+}
+
+// Add event listener for the "Current Location" button
+const currentLocationButton = document.getElementById('current-location-button');
+currentLocationButton.addEventListener('click', () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      fetchWeatherByCoordinates(latitude, longitude);
+    }, () => {
+      alert('Unable to retrieve your location.');
+    });
+  } else {
+    alert('Geolocation is not supported by your browser.');
+  }
+});
+
+    </script>
+
+</html>
